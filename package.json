@@ -1,0 +1,54 @@
+{
+  "name": "realtimecode",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+
+  "scripts": {
+    "dev": "vite",
+    "start:front" :"react-scripts start",
+    "start" :"yarn build && yarn server:prod",
+    "server:dev": "nodemon server.js",
+    "build": "vite build",
+    "lint": "eslint .",
+    "preview": "vite preview",
+    "server:prod": "node server.js",
+    
+  },
+  "dependencies": {
+    "@codemirror/basic-setup": "^0.20.0",
+    "@codemirror/lang-javascript": "^6.2.4",
+    "@codemirror/state": "^6.5.2",
+    "@codemirror/theme-one-dark": "^6.1.3",
+    "@codemirror/view": "^6.38.0",
+    "@uiw/react-codemirror": "^4.23.14",
+    "codemirror": "^5.65.19",
+    "express": "^5.1.0",
+    "node": "^22.17.0",
+    "react": "^19.1.0",
+    "react-avatar": "^5.0.3",
+    "react-dom": "^19.1.0",
+    "react-hot-toast": "^2.5.2",
+    "react-router-dom": "^7.6.3",
+    "socket.io": "^4.8.1",
+    "socket.io-client": "^4.8.1",
+    "uuid": "^11.1.0"
+  },
+  "devDependencies": {
+    "@eslint/js": "^9.29.0",
+    "@types/react": "^19.1.8",
+    "@types/react-dom": "^19.1.6",
+    "@vitejs/plugin-react": "^4.5.2",
+    "eslint": "^9.29.0",
+    "eslint-plugin-react-hooks": "^5.2.0",
+    "eslint-plugin-react-refresh": "^0.4.20",
+    "globals": "^16.2.0",
+    "nodemon": "^3.1.10",
+    "vite": "^7.0.0"
+  },
+  "description": "This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.",
+  "main": "eslint.config.js",
+  "keywords": [],
+  "author": "",
+  "license": "ISC"
+}
