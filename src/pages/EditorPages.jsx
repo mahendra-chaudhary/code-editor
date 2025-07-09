@@ -1,4 +1,3 @@
-
 import React, { useEffect, useState, useRef } from 'react';
 import Client from '../components/Client';
 import { toast } from 'react-hot-toast';
@@ -58,17 +57,19 @@ const EditorPages = () => {
 
     init();
 
-    return () => {
-      socketRef.current.disconnect();
-      socketRef.current.off(ACTIONS.JOINED);
-      socketRef.current.off(ACTIONS.DISCONNECTED);
-    };
+   return () => {
+  if (socketRef.current) {
+    socketRef.current.disconnect();
+    socketRef.current.off(ACTIONS.JOINED);
+    socketRef.current.off(ACTIONS.DISCONNECTED);
+  }
+};
   }, []);
 
-  const copyRoomId = async () => {
-    await navigator.clipboard.writeText(roomId);
-    toast.success('Room ID copied to clipboard');
-  };
+  // const copyRoomId = async () => {
+  //   await navigator.clipboard.writeText(roomId);
+  //   toast.success('Room ID copied to clipboard');
+  // };
 
   const leaveRoom = () => {
     reactNavigate('/');
@@ -92,9 +93,9 @@ const EditorPages = () => {
             ))}
           </div>
         </div>
-        <button className="btn copyBtn" onClick={copyRoomId}>
-          Copy Room ID
-        </button>
+        {/* <button className="btn copyBtn" onClick={copyRoomId}>
+         
+        </button> */}
         <button className="btn leaveBtn" onClick={leaveRoom}>
           Leave
         </button>

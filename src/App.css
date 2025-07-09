@@ -53,10 +53,17 @@ footer{
   height: 80px;
   margin-bottom: 30px;
 }
-.logo{
+.logo {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 24px;
+  border-bottom: 1px solid #444;
+  padding-bottom: 16px;
+}
 
-  height: 80px;
-  margin-bottom: 30px;
+.logoImage {
+  height: 50px;
 }
 .inputBox{
   padding: 10px;
@@ -85,12 +92,9 @@ footer{
   width: 100px;
   margin-left: auto;
 }
-.joinBtn:hover,
-.leaveBtn:hover
-{
-  background: #3aee88;
+.leaveBtn:hover, .copyBtn:hover {
+  background-color: #3ddc75;
 }
-
 .btn:hover{
   background: #3aee88;
 }
@@ -120,25 +124,39 @@ footer{
 } */
  .mainWrap {
   display: flex;
-  justify-content: center;
-  align-items: center;
-  height: 100vh;
+  gap: 24px;
+  padding: 24px;
+  background: #1e1e1e;
+  min-height: 100vh;
+  box-sizing: border-box;
 }
 
- .aside {
-  width: 250px;
-  height: 80vh;
-  background: #282a36;
-  margin-right: 20px;
-  border-radius: 10px;
+.aside {
+  width: 280px;
+  background: #2a2a2a;
+  border-radius: 12px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: #ffffff;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.2);
 }
-
 .editorWrap {
   width: 800px;
   height: 80vh;
   background: #1e1e1e;
   border-radius: 10px;
   overflow: hidden;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ✅ Ensure CodeMirror fills the space correctly */
+.CodeMirror {
+  height: 100% !important;
+  font-size: 16px;
+  line-height: 1.5;
 }
 
 
@@ -146,26 +164,36 @@ footer{
   flex: 1;
 
 }
-
 .clientList {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
-    gap: 20px;
-
-
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  overflow-y: auto;
+  max-height: 250px;
 }
 
-.client{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    font-weight: bold;
-
+.client {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 6px;
+  font-weight: 500;
+  font-size: 14px;
+  color: #ccc;
 }
 .userName{
    
-    margin-top: 10px;
+    /* margin-top: 10px; */
+    color: #9ae6b4;
+}
+textarea#realtimeEditor {
+  height: 100%;
+  width: 100%;
+  background: transparent;
+  border: none;
+  resize: none;
+  font-size: 16px;
+  color: #ffffff;
 }
 
 .logo{
@@ -178,9 +206,18 @@ footer{
 
 
 }
-.leaveBtn{
+.leaveBtn, .copyBtn {
   width: 100%;
-  margin-top: 20px;
+  margin-top: 12px;
+  padding: 10px 0;
+  font-size: 15px;
+  border-radius: 8px;
+  border: none;
+  background-color: #4aed88;
+  color: #000;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
 }
 
 .Codemirror {

@@ -1,68 +1,70 @@
 import React, { useEffect, useRef } from 'react';
 import Codemirror from 'codemirror';
-
-// Required CSS and JS
-import ACTIONS from '../Actions';
 import 'codemirror/lib/codemirror.css';
+import 'codemirror/mode/javascript/javascript';
 import 'codemirror/theme/dracula.css';
-import 'codemirror/mode/javascript/javascript.js';
-import 'codemirror/addon/edit/closetag.js';
-import 'codemirror/addon/edit/closebrackets.js';
+import 'codemirror/addon/edit/closetag';
+import 'codemirror/addon/edit/closebrackets';
+// import ACTIONS from '../Actions';
+import ACTIONS from '../Actions';
 
-const Editor = ({socketRef,roomId}) => {
-  const editorRef = useRef(null);
-  useEffect(() => {
-    async function init(){
-       editorRef.current =  Codemirror.fromTextArea(document.getElementById('realtimeEditor'), {
+/**
+ * Editor component for real-time code editing with CodeMirror.
+ * @param {Object} props - The props object.
+ * @param {Object} props.socketRef - A reference to the WebSocket connection.
+ * @param {string} props.roomId - The ID of the room for real-time collaboration.
+ * @param {Function} props.onCodeChange - A callback function to handle code changes.
+ */
+const Editor = ({socketRef, roomId, onCodeChange}) => {
+ const editorRef = useRef(null);
+
+ /**
+   * Initializes the CodeMirror editor instance.
+   * Sets up event listeners for editor changes and server updates.
+   */
+ useEffect(() => {
+    async function init() {
+      editorRef.current = Codemirror.fromTextArea(document.getElementById('realtimeEditor'), {
         mode: { name: 'javascript', json: true },
         theme: 'dracula',
-        autoCloseTags: true,
-        autoCloseBrackets: true,
-        lineNumbers: true,
-    });
-   
-    
-     editorRef.current.on('change', (instance, changes,onCodeChange) => {
-        // Here you can handle the change event, e.g., send the updated code to the server
-        // console.log('changes', changes);
+        autoCloseTags : true,
+        autoCloseBrackets : true,
+        lineNumbers : true,
+      });
+
+      editorRef.current.on('change',(instance,changes)=>{
         const {origin} = changes;
-        const code  = instance.getValue();
-        onCodeChange(code);
-        if (origin !== 'setValue') {
+        const code = instance.getValue();
+        onCodeChange(code); 
+        if(origin !== 'setValue'){
           socketRef.current.emit(ACTIONS.CODE_CHANGE,{
             roomId,
             code,
           });
-
-        
         }
-        // console.log(code);
-
-    });
-   
-
-  }
+       })
+    }
     init();
-  }, []);
+ }, []); 
 
-  useEffect(() => {
+ /**
+   * Listens for code changes from the server and updates the editor accordingly.
+   */
+ useEffect(() => {
     if(socketRef.current){
-        
-      socketRef.current.on(ACTIONS.CODE_CHANGE, ({ code }) => {
-        // console.log('code change', code);
-         if (code !== null) {
-           editorRef.current.setValue(code);
-         }
-     });
+      socketRef.current.on(ACTIONS.CODE_CHANGE,({code})=>{
+        if(code !== null){
+          editorRef.current.setValue(code);
+        }
+      })
     }
-    return () => {
-      
-        socketRef.current.off(ACTIONS.CODE_CHANGE);
-      
-    }
-  }, [socketRef.current]);
+ },[socketRef.current]);
 
-  return <textarea id="realtimeEditor"></textarea> ;
+ return (
+  <div style={{ height: '100%' }}>
+    <textarea id='realtimeEditor'></textarea>
+  </div>
+);
 
 };
 

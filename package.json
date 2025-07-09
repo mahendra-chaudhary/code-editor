@@ -3,17 +3,15 @@
   "private": true,
   "version": "0.0.0",
   "type": "module",
-
   "scripts": {
     "dev": "vite",
-    "start:front" :"react-scripts start",
-    "start" :"yarn build && yarn server:prod",
+    "start:front": "react-scripts start",
+    "start": "yarn build && yarn server:prod",
     "server:dev": "nodemon server.js",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview",
-    "server:prod": "node server.js",
-    
+    "server:prod": "node server.js"
   },
   "dependencies": {
     "@codemirror/basic-setup": "^0.20.0",
@@ -23,7 +21,7 @@
     "@codemirror/view": "^6.38.0",
     "@uiw/react-codemirror": "^4.23.14",
     "codemirror": "^5.65.19",
-    "express": "^5.1.0",
+    "express": "^4.21.2",
     "node": "^22.17.0",
     "react": "^19.1.0",
     "react-avatar": "^5.0.3",
