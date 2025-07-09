@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "vite",
     "start:front": "react-scripts start",
-    "start": "yarn build && yarn server:prod",
+    "start": "npm run server:dev && npm run dev",
     "server:dev": "nodemon server.js",
     "build": "vite build",
     "lint": "eslint .",
